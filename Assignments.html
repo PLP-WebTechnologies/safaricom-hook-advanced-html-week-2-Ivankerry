@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimedia Webpage and Registration Form</title>
+    <style>
+        /* Basic styling for the webpage */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+        }
+        header h1 {
+            text-align: center;
+            text-transform: uppercase;
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px;
+            background: #fff;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form label {
+            margin: 10px 0 5px;
+        }
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="password"],
+        form input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        form input[type="radio"],
+        form input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        form button {
+            padding: 10px;
+            font-size: 16px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        form button:hover {
+            background: #555;
+        }
+        #errorMessages {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        // Function to validate the registration form
+        function validateForm() {
+            const form = document.forms['registrationForm'];
+            const errorMessages = [];
+
+            const fullName = form['fullName'].value;
+            const email = form['email'].value;
+            const password = form['password'].value;
+            const age = form['age'].value;
+            const gender = form['gender'].value;
+            const terms = form['terms'].checked;
+
+            // Check if any required field is empty
+            if (fullName === '') errorMessages.push("Full Name is required.");
+            if (email === '') errorMessages.push("Email is required.");
+            if (password === '') errorMessages.push("Password is required.");
+            if (age === '') errorMessages.push("Age is required.");
+            if (!gender) errorMessages.push("Gender selection is required.");
+            if (!terms) errorMessages.push("You must agree to the terms and conditions.");
+
+            // If there are errors, display them
+            if (errorMessages.length > 0) {
+                document.getElementById('errorMessages').innerHTML = errorMessages.join("<br>");
+                return false; // Prevent form submission
+            }
+
+            // If validation passes, show success message
+            alert('Registration Successful');
+            return true;  // Proceed with form submission
+        }
+    </script>
+</head>
+<body>
+    <!-- Header section -->
+    <header>
+        <h1>Multimedia Webpage and Registration Form</h1>
+    </header>
+    <div class="container">
+        <div class="content">
+            <!-- Audio section -->
+            <h2>Audio</h2>
+            <audio controls>
+                <source src="audiofile.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
+            <!-- Video section -->
+            <h2>Video</h2>
+            <video controls poster="posterimage.jpg">
+                <source src="videofile.mp4" type="video/mp4">
+                <source src="videofile.webm" type="video/webm">
+                Your browser does not support the video tag.
+            </video>
+
+            <!-- Registration form section -->
+            <h2>Registration Form</h2>
+            <form name="registrationForm" onsubmit="return validateForm()">
+                <!-- Full Name input -->
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" required>
+
+                <!-- Email Address input -->
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+
+                <!-- Password input -->
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" minlength="8" required>
+
+                <!-- Age input -->
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="18" required>
+
+                <!-- Gender selection -->
+                <label>Gender:</label>
+                <input type="radio" id="male" name="gender" value="male" required>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female" required>
+                <label for="female">Female</label>
+                <input type="radio" id="other" name="gender" value="other" required>
+                <label for="other">Other</label>
+
+                <!-- Terms and Conditions checkbox -->
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I agree to the terms and conditions</label>
+
+                <!-- Submit button -->
+                <button type="submit">Register</button>
+            </form>
+
+            <!-- Error messages display -->
+            <div id="errorMessages"></div>
+        </div>
+    </div>
+</body>
+</html>
